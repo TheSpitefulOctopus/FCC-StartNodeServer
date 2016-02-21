@@ -1,0 +1,15 @@
+var express = require('express');
+var fs = require('fs');
+var app = express();
+app.get('/books', function(request, response) {
+	var obj;
+	fs.readFile(process.argv[3], function(err, data) {
+		if(err){
+			response.send(500);
+		} else {
+			obj = JSON.parse(data);
+		}
+		response.send(obj);
+	});
+});
+app.listen(process.argv[2]);
